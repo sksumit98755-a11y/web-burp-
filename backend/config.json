@@ -1,0 +1,29 @@
+{
+    "proxy": {
+        "default_port": 8080
+    },
+    "ssl": {
+        "ca_org": "WebBurp Lab",
+        "ca_country": "US"
+    },
+    "intruder": {
+        "max_threads": 50,
+        "default_threads": 10
+    },
+    "bypass": {
+        "techniques": [
+            "parameter_removal",
+            "null_value",
+            "negative_value",
+            "race_condition",
+            "type_juggling",
+            "expiry_manipulate",
+            "blank_value",
+            "special_chars",
+            "decimal_value",
+            "hex_value",
+            "json_injection",
+            "array_injection"
+        ]
+    }
+}
