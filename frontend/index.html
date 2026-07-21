@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebBurp Suite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>WebBurp</h1>
+            <div id="status">● Ready</div>
+        </header>
+
+        <nav>
+            <button class="active" data-tab="proxy">Proxy</button>
+            <button data-tab="repeater">Repeater</button>
+            <button data-tab="intruder">Intruder</button>
+            <button data-tab="bypass">Bypass</button>
+            <button data-tab="ssl">SSL</button>
+        </nav>
+
+        <main>
+            <!-- Proxy Tab -->
+            <section id="tab-proxy" class="tab-content active">
+                <div class="card">
+                    <h3>Proxy Control</h3>
+                    <div class="row">
+                        <input type="number" id="proxyPort" value="8080" placeholder="Port">
+                        <button id="btnStartProxy" class="btn primary">Start</button>
+                        <button id="btnStopProxy" class="btn danger">Stop</button>
+                    </div>
+                    <div class="toggle-wrap">
+                        <label>Intercept:</label>
+                        <input type="checkbox" id="toggleIntercept">
+                        <span id="interceptLabel">OFF</span>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Captured Requests</h3>
+                    <div id="capturedList"></div>
+                </div>
+            </section>
+
+            <!-- Repeater Tab -->
+            <section id="tab-repeater" class="tab-content">
+                <div class="card">
+                    <h3>Request Repeater</h3>
+                    <input type="url" id="repUrl" placeholder="https://target.com/api">
+                    <select id="repMethod">
+                        <option>GET</option>
+                        <option>POST</option>
+                        <option>PUT</option>
+                        <option>DELETE</option>
+                    </select>
+                    <textarea id="repHeaders" placeholder="Headers (JSON)">{"User-Agent":"WebBurp"}</textarea>
+                    <textarea id="repBody" placeholder="Request Body"></textarea>
+                    <button id="btnSendRep" class="btn primary">Send</button>
+                    <div id="repResponse"></div>
+                </div>
+            </section>
+
+            <!-- Intruder Tab -->
+            <section id="tab-intruder" class="tab-content">
+                <div class="card">
+                    <h3>OTP Bruteforce</h3>
+                    <input type="url" id="intUrl" placeholder="https://target.com/verify">
+                    <input type="text" id="intOtpField" value="otp" placeholder="OTP Field">
+                    <input type="number" id="intThreads" value="10" placeholder="Threads">
+                    <button id="btnStartInt" class="btn danger">Start Attack</button>
+                    <div id="intResults"></div>
+                </div>
+            </section>
+
+            <!-- Bypass Tab -->
+            <section id="tab-bypass" class="tab-content">
+                <div class="card">
+                    <h3>OTP Bypass Wizard (12 Techniques)</h3>
+                    <input type="url" id="byUrl" placeholder="https://target.com/verify">
+                    <button id="btnRunBypass" class="btn primary">Run All Techniques</button>
+                    <div id="byResults"></div>
+                </div>
+            </section>
+
+            <!-- SSL Tab -->
+            <section id="tab-ssl" class="tab-content">
+                <div class="card">
+                    <h3>SSL Certificate Manager</h3>
+                    <button id="btnGenCA" class="btn primary">Generate Root CA</button>
+                    <button id="btnDownloadCA" class="btn success">Download CA</button>
+                    <div class="row">
+                        <input type="text" id="sslDomain" placeholder="domain.com">
+                        <button id="btnGenDomain" class="btn info">Generate Cert</button>
+                    </div>
+                    <div id="sslStatus"></div>
+                    <div class="guide">
+                        <strong>SSL Pinning Bypass:</strong>
+                        Frida: <code>frida -U -f com.app --codeshare</code> | 
+                        Objection: <code>android sslpinning disable</code>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
